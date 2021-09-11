@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> {
                     Expanded(
                       flex: 6,
                       child: TextField(
-                        // onChanged: bloc.filterCity,
+                        onChanged: bloc.filterCity,
                         controller: cityNameController,
                       ),
                     ),

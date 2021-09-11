@@ -21,9 +21,10 @@ class CityBloc extends SimpleBloc<List<CityInfo>> {
     add(_cachedList);
   }
 
-  // filterCity(String name) {
-  //   final filteredCities = _cachedList.map((e) {
-  //     if (e.name.toLowerCase().contains(name.toLowerCase())) return e;
-  //   }).toList();
-  // }
+  filterCity(String name) {
+    print(name);
+    return add(_cachedList
+        .where((city) => city.name.toLowerCase().contains(name.toLowerCase()))
+        .toList());
+  }
 }
