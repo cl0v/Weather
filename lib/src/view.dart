@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:weather/src/bloc.dart';
 import 'utils/navigator.dart';
@@ -23,6 +25,7 @@ class _HomePageState extends State<HomePage> {
 
   onAddCityPressed() {
     bloc.addCity(cityNameController.text);
+    cityNameController.clear();
   }
 
   @override
@@ -32,6 +35,13 @@ class _HomePageState extends State<HomePage> {
         child: StreamBuilder<List<CityInfo>>(
             stream: bloc.stream,
             builder: (context, snapshot) {
+              if (snapshot.hasError) {
+                Timer(Duration(seconds: 2), () {
+                  bloc.init();
+                });
+                return Text(
+                    'Voce digitou errado a cidade. Aguarde 2 segundos e comece novamente!');
+              }
               if (!snapshot.hasData || snapshot.data == null)
                 return Center(
                   child: CircularProgressIndicator(),

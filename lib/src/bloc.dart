@@ -8,17 +8,26 @@ class CityBloc extends SimpleBloc<List<CityInfo>> {
   var _cachedList = <CityInfo>[];
 
   void init() async {
-    _cachedList
-      ..add(await repository.getWeather('Curitiba, BR'))
-      ..add(await repository.getWeather('Sydney, AU'))
-      ..add(await repository.getWeather('London, GB'))
-      ..add(await repository.getWeather('London, CA'));
-    add(_cachedList);
+    try {
+      _cachedList
+        ..add(await repository.getWeather('Curitiba, BR'))
+        ..add(await repository.getWeather('Sydney, AU'))
+        ..add(await repository.getWeather('London, GB'))
+        ..add(await repository.getWeather('London, CA'));
+      add(_cachedList);
+    } catch (e) {
+      addError('Ocorreu um Error');
+    }
   }
 
   addCity(String name) async {
-    _cachedList..add(await repository.getWeather(name));
-    add(_cachedList);
+    try {
+      _cachedList..add(await repository.getWeather(name));
+      add(_cachedList);
+    } catch (e) {
+      _cachedList = [];
+      addError('Você digitou errado o nome da cidade');
+    }
   }
 
   filterCity(String name) {
