@@ -10,9 +10,7 @@ class WeatherRepository {
         'api.openweathermap.org', '/data/2.5/weather', queryParameters);
 
     final response = await http.get(uri);
-    if (response.statusCode > 200) {
-      throw Exception();
-    } // Não me batam por esse error Handler fulero kaka
+
     return CityInfo.fromJson(response.body);
   }
 }
