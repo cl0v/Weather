@@ -1,7 +1,11 @@
 import 'package:http/http.dart' as http;
 import 'models.dart';
 
-class WeatherRepository {
+abstract class IWeatherRepository {
+  Future<CityInfo> getWeather(String city, [String key]);
+}
+
+class WeatherRepository implements IWeatherRepository {
   Future<CityInfo> getWeather(String city,
       [key = 'b8f9be6a0a5a5800fe6264b93564121c']) async {
     final queryParameters = {'q': city, 'appid': key, 'units': 'metric'};

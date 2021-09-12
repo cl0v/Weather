@@ -3,7 +3,7 @@ import 'repository.dart';
 import 'utils/simple_bloc.dart';
 
 class CityBloc extends SimpleBloc<List<CityInfo>> {
-  WeatherRepository repository = WeatherRepository();
+  IWeatherRepository repository = WeatherRepository();
 
   var _cachedList = <CityInfo>[];
 
