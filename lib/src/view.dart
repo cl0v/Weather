@@ -39,8 +39,7 @@ class _HomePageState extends State<HomePage> {
                 Timer(Duration(seconds: 2), () {
                   bloc.init();
                 });
-                return Text(
-                    'Voce digitou errado a cidade. Aguarde 2 segundos e comece novamente!');
+                return Text('${snapshot.error}, aguarde 2 segundos...');
               }
               if (!snapshot.hasData || snapshot.data == null)
                 return Center(
@@ -86,7 +85,9 @@ class CityDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(onPressed: ()=>pop(context),),
+        leading: BackButton(
+          onPressed: () => pop(context),
+        ),
       ),
       body: Center(
         child: Column(

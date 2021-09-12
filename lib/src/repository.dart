@@ -7,8 +7,8 @@ abstract class IWeatherRepository {
 }
 
 class WeatherRepository implements IWeatherRepository {
-  IHttpClient service;
-  WeatherRepository({this.service = const HttpClientService()});
+  final IHttpClient service;
+  const WeatherRepository({this.service = const HttpClientService()});
 
   Future<CityInfo> getWeather(String city,
       {key = 'b8f9be6a0a5a5800fe6264b93564121c'}) async {

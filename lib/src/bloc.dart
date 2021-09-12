@@ -3,7 +3,10 @@ import 'repository.dart';
 import 'utils/simple_bloc.dart';
 
 class CityBloc extends SimpleBloc<List<CityInfo>> {
-  IWeatherRepository repository = WeatherRepository();
+  CityBloc({
+    this.repository = const WeatherRepository(),
+  });
+  final IWeatherRepository repository;
 
   var _cachedList = <CityInfo>[];
 
@@ -31,7 +34,6 @@ class CityBloc extends SimpleBloc<List<CityInfo>> {
   }
 
   filterCity(String name) {
-    print(name);
     return add(_cachedList
         .where((city) => city.name.toLowerCase().contains(name.toLowerCase()))
         .toList());
