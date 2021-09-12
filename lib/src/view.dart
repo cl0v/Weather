@@ -63,13 +63,16 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
                 ...list
-                    .map((city) => ListTile(
-                          title: Text('${city.name}, ${city.country}'),
-                          onTap: () => push(
-                            context,
-                            CityDetails(city: city),
+                    .map((city) => Card(
+                      child: ListTile(
+                            title: Text('${city.name}, ${city.country}'),
+                            subtitle: Text('${city.temperature}°C'),
+                            onTap: () => push(
+                              context,
+                              CityDetails(city: city),
+                            ),
                           ),
-                        ))
+                    ))
                     .toList(),
               ]);
             }),
