@@ -10,9 +10,9 @@ class CityBloc extends SimpleBloc<List<CityInfo>> {
 
   var _cachedList = <CityInfo>[];
 
-  void init() async {
+  void init([restart = false]) async {
     try {
-      _cachedList
+     if(!restart) _cachedList
         ..add(await repository.getWeather('Curitiba, BR'))
         ..add(await repository.getWeather('Sydney, AU'))
         ..add(await repository.getWeather('London, GB'))
@@ -27,9 +27,10 @@ class CityBloc extends SimpleBloc<List<CityInfo>> {
     try {
       _cachedList..add(await repository.getWeather(name));
       add(_cachedList);
+    } on BadRequestException catch (e) {
+      addError('${e.message}, tente novamente');
     } catch (e) {
-      _cachedList = [];
-      addError('Você digitou errado o nome da cidade');
+      addError('Ocorreu um erro inexperado');
     }
   }
 

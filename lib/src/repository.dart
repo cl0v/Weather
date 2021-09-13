@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:weather/src/services.dart';
 
 import 'models.dart';
@@ -25,7 +27,12 @@ class WeatherRepository implements IWeatherRepository {
     );
 
     final response = await service.get(uri);
+    if (response.statusCode == 404) throw BadRequestException('Cidade inexistente');
 
     return CityInfo.fromJson(response.body);
   }
+}
+
+class BadRequestException extends HttpException {
+  BadRequestException(String message) : super(message);
 }

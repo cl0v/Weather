@@ -37,9 +37,9 @@ class _HomePageState extends State<HomePage> {
             builder: (context, snapshot) {
               if (snapshot.hasError) {
                 Timer(Duration(seconds: 2), () {
-                  bloc.init();
+                  bloc.init(true);
                 });
-                return Text('${snapshot.error}, aguarde 2 segundos...');
+                return Text('${snapshot.error} em 2 segundos...');
               }
               if (!snapshot.hasData || snapshot.data == null)
                 return Center(
