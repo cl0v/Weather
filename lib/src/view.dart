@@ -23,6 +23,12 @@ class _HomePageState extends State<HomePage> {
     bloc.init();
   }
 
+  @override
+  void dispose() {
+    bloc.dispose();
+    super.dispose();
+  }
+
   onAddCityPressed() {
     bloc.addCity(cityNameController.text);
     cityNameController.clear();
@@ -64,7 +70,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 ...list
                     .map((city) => Card(
-                      child: ListTile(
+                          child: ListTile(
                             title: Text('${city.name}, ${city.country}'),
                             subtitle: Text('${city.temperature}°C'),
                             onTap: () => push(
@@ -72,7 +78,7 @@ class _HomePageState extends State<HomePage> {
                               CityDetails(city: city),
                             ),
                           ),
-                    ))
+                        ))
                     .toList(),
               ]);
             }),
